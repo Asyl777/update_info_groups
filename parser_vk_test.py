@@ -2,7 +2,7 @@ import re
 import vk_api
 import get_owner_id
 from datetime import datetime
-from main import DB
+from db import DB
 
 
 class vk_parser_api:
@@ -30,8 +30,8 @@ class vk_parser_api:
                 city_name = self.group_info['city']['title']
                 ids = self.db.get_city_id(city_name)
                 city_id = ids[0][0]
-                country_id = ids[0][1]
-                region_id = ids[0][2]
+                country_id = ids[0][2]
+                region_id = ids[0][1]
             except:
                 city_id = 0
                 country_id = 0
@@ -60,7 +60,7 @@ class vk_parser_api:
     # запуск функций
     def start(self):
         self.parse_vk_groups()
-        # self.update_table()
+        self.update_table()
 
 
 links = get_owner_id.links_vk

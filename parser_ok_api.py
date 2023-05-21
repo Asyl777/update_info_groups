@@ -1,5 +1,5 @@
 from ok_api import OkApi
-from main import DB
+from db import DB
 import time
 from datetime import datetime
 import re
@@ -74,7 +74,7 @@ class Parse_Api_Ok:
 
     def start(self):
         self.parse_info()
-        # self.update_info_group()
+        self.update_info_group()
 
 
 links = get_owner_id.links_ok

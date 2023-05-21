@@ -1,4 +1,4 @@
-from main import DB
+from db import DB
 
 db= DB()
 links = db.get_link()

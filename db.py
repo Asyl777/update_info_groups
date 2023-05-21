@@ -7,7 +7,7 @@ class DB:
 
     # Функция для взятия ссылок
     def get_link(self):
-        result = self.client.execute('SELECT link FROM resource_social')
+        result = self.client.execute('SELECT link FROM resource_social ORDER BY start_date_imas LIMIT 1')
         return result
 
     # Функция для взятий айди по ссылке
@@ -18,18 +18,12 @@ class DB:
     # Функция взятия айди города, региона и страны
     def get_city_id(self, city):
         result = self.client.execute(
-            "SELECT city_id, country_id, region_id FROM cities WHERE city_name = '{}';".format(city))
+            "SELECT city_id, region_id, country_id FROM cities WHERE city_name = '{}';".format(city))
         return result
 
     # Функция обновления данных
     def update_groups(self, link, data):
         self.client.execute('''DELETE FROM resource_social WHERE link = '{}' '''.format(link))
-        query = '''
-             INSERT INTO resource_social
-             (id, country_id, region_id, city_id, resource_name, link, screen_name, image_profile, start_date_imas, members)
-             VALUES
-         '''
-
         self.client.execute('INSERT INTO resource_social (id, country_id, region_id, city_id, resource_name, link, '
                             'screen_name, image_profile, start_date_imas, members)   VALUES', data)
 
